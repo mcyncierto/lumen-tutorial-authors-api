@@ -54,9 +54,9 @@ class AuthorController extends Controller
      * Obtain and show one author
      * @return Illuminate\Http\Response
      */
-    public function show($author)
+    public function show($authorId)
     {
-        $author = Author::findOrFail($author);
+        $author = Author::findOrFail($authorId);
 
         return $this->successResponse($author);
     }
@@ -65,7 +65,7 @@ class AuthorController extends Controller
      * Update an existing author
      * @return Illuminate\Http\Response
      */
-    public function update(Request $request, $author)
+    public function update(Request $request, $authorId)
     {
         $rules = [
             'name' => 'max:255',
@@ -74,7 +74,7 @@ class AuthorController extends Controller
         ];
 
         $this->validate($request, $rules);
-        $author = Author::findOrFail($author);
+        $author = Author::findOrFail($authorId);
         $author->fill($request->all());
 
         if ($author->isClean()) {
@@ -90,9 +90,9 @@ class AuthorController extends Controller
      * Remove an existing author
      * @return Illuminate\Http\Response
      */
-    public function destroy( $author)
+    public function destroy($authorId)
     {
-        $author = Author::findOrFail($author);
+        $author = Author::findOrFail($authorId);
         $author->delete();
 
         return $this->successResponse($author);
